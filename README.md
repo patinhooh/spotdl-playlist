@@ -35,7 +35,7 @@ Run the sdl.ps1 script to download a Spotify playlist:
 
 ### Update Playlists
 
-`Note`: This feature is still under development.
+`Note`: This feature still under development.
 
 ## Missing Tracks
 
