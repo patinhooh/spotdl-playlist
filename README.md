@@ -10,6 +10,7 @@ This repository contains PowerShell scripts to download and manage Spotify playl
   - [Update Playlists](#update-playlists)
   - [Update Missing Tracks of Playlist](#update-missing-tracks-of-playlist)
 - [Missing Tracks](#missing-tracks)
+- [Known Issues](#known-issues)
 - [License](#license)
 
 ## Installation
