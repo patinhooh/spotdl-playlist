@@ -1,4 +1,3 @@
-
 param (
     [string]$playlistName,      # Name of the playlist to download
     [string]$playlistUrl,       # URL of the Spotify playlist
