@@ -39,22 +39,27 @@ Run the `sdl.ps1` script to download a Spotify playlist:
 Run the `upd.ps1` script to update all **already downloaded** playlist:
 
 ```bash
-.\upd.ps1 [<Optional: Playlists Path>]
+.\upd.ps1 [<Optional: Playlists Path>] [-xspf]
 ```
 - **Playlists Path**: The path where the playlists are saved. (Optional) A default can be set inside the script.
+- **xspf**: (Optional) Include this flag to generate XSPF files for the playlists.
 
 ### Update Missing Tracks of Playlist
 
 Run the `mpd.ps1` script to update the missing tracks of an **already downloaded** playlist:
 
 ```bash
-.\mpd.ps1 <Playlist Path>
+.\mpd.ps1 <Playlist Path> 
 ```
 - **Playlists Path**: The path where the playlist is saved.
 
 ## Missing Tracks
 
 If a track is not found during the download process, the `missing_tracks.txt` file will contain the relevant information. For more details, check the [missing_tracks_example.txt](missing_tracks_example.txt) file in the repository.
+
+## Known Issues
+
+- For 429/500/404 Errors and Rate Limiting Issues, you can see the details [here](https://github.com/spotDL/spotify-downloader/issues/2142).
 
 ## License
 

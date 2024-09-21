@@ -1,4 +1,5 @@
 param (
+    [switch]$xspf,              # A flag parameter for creating XSPF files
     [string]$playlistsPath = "" # Default directory of the playlists downloaded
 )
 
@@ -14,7 +15,9 @@ if (-not $playlistsPath) {
 }
 
 $originalPath = Get-Location
-$ManuallyUpdScript = Join-Path $originalPath  "mpd.ps1"
+$mpdScript = Join-Path $originalPath  "mpd.ps1"
+$xspfScript = Join-Path $originalPath  "xspf.ps1"
+
 $playlistDirectories = Get-ChildItem -Path $playlistsPath -Directory
 
 foreach ($dir in $playlistDirectories) {
@@ -23,27 +26,38 @@ foreach ($dir in $playlistDirectories) {
     $missingTracksFile = Join-Path $infoPath "missing_tracks.txt"
 
     # Check if sync.spotdl file exists and sync the playlist
-    if (Test-Path -Path $syncFilePath) {
-        Write-Host "Syncing playlist: $($dir.Name)" -ForegroundColor Magenta
-        Set-Location -Path $dir.FullName
-        
-        # Execute the spotdl command
-        try {
-            Invoke-Expression "spotdl sync `"$syncFilePath`" --sync-without-deleting"
-        } catch {
-            Write-Host "Failed to sync playlist: $($dir.Name)" -ForegroundColor Red
-            Write-Host "Error:`r`n$_" -ForegroundColor Red
-        }
+    if (-not (Test-Path -Path $syncFilePath)) {
+        Write-Host "No sync file found for directory: $($dir.Name)" -ForegroundColor Yellow
+        continue
+    }
 
-        # Check for manually added tracks in the missing_tracks file
+    Write-Host "Syncing playlist: $($dir.Name)" -ForegroundColor Magenta
+    Set-Location -Path $dir.FullName
+    
+    # Execute the spotdl command
+    try {
+        Invoke-Expression "spotdl sync `"$syncFilePath`" --sync-without-deleting"
+    } catch {
+        Write-Host "Failed to sync playlist: $($dir.Name)" -ForegroundColor Red
+        Write-Host "Error:`r`n$_" -ForegroundColor Red
+    }
+
+    # Check for manually added tracks in the missing_tracks file
+    try {
+        & $mpdScript -missingTracksFile $missingTracksFile -playlistPath $dir.FullName
+    } catch {
+        Write-Host "Error occurred in mpd.ps1:" -ForegroundColor Red
+        Write-Host $_.Exception.Message -ForegroundColor Red
+    } 
+
+    # Create xspf file for playlist
+    if($xspf){
         try {
-            & $ManuallyUpdScript -missingTracksFile $missingTracksFile -playlistPath $dir.FullName
+            & $xspfScript -playlistPath $dir.FullName
         } catch {
             Write-Host "Error occurred in mpd.ps1:" -ForegroundColor Red
             Write-Host $_.Exception.Message -ForegroundColor Red
-        }
-    } else {
-        Write-Host "No sync file found for directory: $($dir.Name)" -ForegroundColor Yellow
+        } 
     }
 }
 
