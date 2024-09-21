@@ -30,7 +30,7 @@ try {
     } else {
         Write-Host "Directory already exists:" -ForegroundColor Yellow
         Write-Host "`t$directoryPath"
-        # exit
+        exit
     }
 } catch {
     Write-Host "Failed to create directory:" -ForegroundColor Red
@@ -48,7 +48,7 @@ try {
     } else {
         Write-Host "Directory already exists:" -ForegroundColor Yellow
         Write-Host "`t$infoPath"
-        # exit
+        exit
     }
 } catch {
     Write-Host "Failed to create .info directory:" -ForegroundColor Red
@@ -73,7 +73,7 @@ Write-Host $command -ForegroundColor Magenta
 
 # Execute the spotdl command
 try {
-    # Invoke-Expression $command
+    Invoke-Expression $command
 } catch {
     Write-Host "spotdl failed." -ForegroundColor Red
     Write-Host "Error:`r`n$_" -ForegroundColor Red
