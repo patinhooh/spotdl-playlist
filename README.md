@@ -8,7 +8,7 @@ This repository contains PowerShell scripts to download and manage Spotify playl
 - [Usage](#usage)
   - [Download a Playlist](#download-a-playlist)
   - [Update Playlists](#update-playlists)
-- [Example of Missing Tracks](#example-of-missing-tracks)
+- [Missing Tracks](#missing-tracks)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -38,7 +38,7 @@ Run the sdl.ps1 script to download a Spotify playlist:
 
 `Note`: This feature is still under development.
 
-## Example of Missing Tracks
+## Missing Tracks
 
 If a track is not found during the download process, the missing_tracks.txt file will contain the info. See [missing_tracks_example.txt](missing_track_example.txt) for more detail.
 
