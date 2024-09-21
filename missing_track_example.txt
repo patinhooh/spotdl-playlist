@@ -1,0 +1,5 @@
+# After using sdl.ps1, if it fails to find something it will look like this.
+https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - LookupError: No results found for song: 'Artist' - 'Music Name'
+
+# To use the upd.ps1 to updated taking this into account, add the source behind the link of spotify: 'YoutubeURL|SpotifyURL [...]'
+https://music.youtube.com/watch?v=lYBUbBu4W08&si=mWmOBJomW8bXyKEr|https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - LookupError: No results found for song: 'Artist' - 'Music Name'
