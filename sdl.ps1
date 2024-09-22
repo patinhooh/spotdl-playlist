@@ -70,8 +70,6 @@ try {
 # Command to synchronize the playlist with spotdl
 $command = "spotdl sync $playlistUrl --save-file '$infoPath\sync.spotdl' --save-errors '$infoPath\missing_tracks.txt'"
 Write-Host $command -ForegroundColor Magenta
-
-# Execute the spotdl command
 try {
     Invoke-Expression $command
 } catch {
@@ -101,6 +99,5 @@ if (Test-Path -Path "$infoPath\missing_tracks.txt") {
     }
 }
 
-# Return to the original path
 Set-Location -Path $originalPath
 Write-Host "Playlist '$playlistName' downloaded." -ForegroundColor Green

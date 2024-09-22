@@ -8,7 +8,9 @@ This repository contains PowerShell scripts to download and manage Spotify playl
 - [Usage](#usage)
   - [Download a Playlist](#download-a-playlist)
   - [Update Playlists](#update-playlists)
+  - [Update All Playlists](#update-all-playlists)
   - [Update Missing Tracks of Playlist](#update-missing-tracks-of-playlist)
+  - [Create xspf File of the Playlist](#create-xspf-file-of-the-playlist)
 - [Missing Tracks](#missing-tracks)
 - [Known Issues](#known-issues)
 - [License](#license)
@@ -36,14 +38,28 @@ Run the `sdl.ps1` script to download a Spotify playlist:
 - **Spotify URL**: The URL of the Spotify playlist.
 - **Download Path**: The path where the playlist will be saved. (Optional) A default can be set inside the script.
 
+<hr>
+
 ### Update Playlists
-Run the `upd.ps1` script to update all **already downloaded** playlist:
+Run the `upd.ps1` script to update an **already downloaded** playlist:
 
 ```bash
-.\upd.ps1 [<Optional: Playlists Path>] [-xspf]
+.\upd.ps1 <Playlist Path>
+```
+- **Playlists Path**: The path where the playlist is saved.
+
+<hr>
+
+### Update All Playlists
+Run the `updall.ps1` script to update all **already downloaded** playlists:
+
+```bash
+.\updall.ps1 [<Optional: Playlists Path>] [-xspf]
 ```
 - **Playlists Path**: The path where the playlists are saved. (Optional) A default can be set inside the script.
-- **xspf**: (Optional) Include this flag to generate XSPF files for the playlists.
+- **xspf**: (Optional) Include this flag to generate *xspf* files for the playlists.
+
+<hr>
 
 ### Update Missing Tracks of Playlist
 
@@ -53,6 +69,19 @@ Run the `mpd.ps1` script to update the missing tracks of an **already downloaded
 .\mpd.ps1 <Playlist Path> 
 ```
 - **Playlists Path**: The path where the playlist is saved.
+
+<hr>
+
+### Create xspf File of the Playlist
+
+Run the `xspf.ps1` script to create a *xspf* file of an **already downloaded** playlist:
+
+```bash
+.\xspf.ps1 <Playlist Path> 
+```
+- **Playlists Path**: The path where the playlist is saved.
+
+<hr>
 
 ## Missing Tracks
 

@@ -2,9 +2,7 @@ param (
     [string]$playlistPath
 )
 
-# Check if playlistPath exists
 if (-not $playlistPath) {
-    Write-Host "Please specify the download path either in the script or as a command line argument." -ForegroundColor Yellow
     Write-Host "Usage: .\mpd.ps1 <Playlist Path>" -ForegroundColor Magenta
     exit
 } elseif (-not (Test-Path -Path $playlistPath)) {
@@ -15,30 +13,36 @@ if (-not $playlistPath) {
 
 $originalPath = Get-Location
 $missingTracksFile = Join-Path $playlistPath ".info\missing_tracks.txt"
-Set-Location $playlistPath
 
-# Read missing_tracks.txt and download the manually add musics
-if (Test-Path -Path $missingTracksFile) {
-    $missingTracks = Get-Content $missingTracksFile | Where-Object { $_ -match "\|" }
-    if ($missingTracks.Count -gt 0) {
-        Write-Host "Processing manually added tracks for: $($dir.Name)" -ForegroundColor Cyan
-        foreach ($track in $missingTracks) {
-            # TODO: see a better way of doing this
-            $splitTrack = $track -split "\|"
-            $sourceTrack = $splitTrack[1] -split " -"
-            $nameTrack = $splitTrack[1] -split ": "
+if (-not (Test-Path -Path $missingTracksFile)) {
+    Write-Host "No missing tracks file found in the directory:" -ForegroundColor Yellow
+    Write-Host "`t$playlistPath"
+    exit
+}
 
-            $nameTrack = $nameTrack[2]
-            $sourceUrl = $splitTrack[0].Trim()
-            $spotifyUrl = $sourceTrack[0].Trim()
+$missingTracks = Get-Content $missingTracksFile | Where-Object { $_ -match "\|" }
+if (-not ($missingTracks.Count -gt 0)) {
+    Write-Host "No manually added tracks found in missing tracks." -ForegroundColor Yellow
+    exit
+}
 
-            Write-Host "Downloading manually added track: $nameTrack" -ForegroundColor Cyan
+Write-Host "Processing manually added tracks for:" -ForegroundColor Blue
+Write-Host "`t$playlistPath"
 
-            # Download the manually added track
-            Invoke-Expression "spotdl download '$sourceUrl|$spotifyUrl'"
-        }
-    } else {
-        Write-Host "No manually added tracks found in missing_tracks for '$($dir.Name)'" -ForegroundColor Yellow
+# Download the manually add musics
+Set-Location -Path $playlistPath
+foreach ($track in $missingTracks) {
+    $splitLine = $track -split "\s+"
+    $nameTrackPart = $track -split ": "
+    $downloadPair = $splitLine[0]
+    $nameTrack = $nameTrackPart[2]
+
+    Write-Host "Downloading manually added track: $nameTrack" -ForegroundColor Blue
+    try {
+        Invoke-Expression "spotdl download '$downloadPair'"
+    } catch {
+        Write-Host "Failed to download music." -ForegroundColor Red
+        Write-Host "Error:`r`n$_" -ForegroundColor Red
     }
 }
 
