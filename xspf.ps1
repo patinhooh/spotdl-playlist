@@ -32,7 +32,7 @@ $xspfContent = @"
 
 foreach ($track in $trackFiles) {
     # Convert the file path to a URI
-    $uri = [System.Uri]::EscapeUriString("file:///$($track.FullName)")
+    $uri = [System.Uri]::EscapeUriString("file:///$($track.FullName)") -replace '%5C', '/'
     $xspfContent += @"
     <track>
       <location>$uri</location>
