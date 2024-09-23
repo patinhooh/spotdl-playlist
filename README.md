@@ -10,7 +10,8 @@ This repository contains PowerShell scripts to download and manage Spotify playl
   - [Update Playlists](#update-playlists)
   - [Update All Playlists](#update-all-playlists)
   - [Update Missing Tracks of Playlist](#update-missing-tracks-of-playlist)
-  - [Create xspf File of the Playlist](#create-xspf-file-of-the-playlist)
+  - [Create xspf file of the Playlist](#create-xspf-file-of-the-playlist)
+  - [Create xspf file for All Playlist](#create-xspf-file-for-all-playlist)
 - [Missing Tracks](#missing-tracks)
 - [Known Issues](#known-issues)
 - [License](#license)
@@ -84,7 +85,7 @@ Run the `xspf.ps1` script to create a *xspf* file of an **already downloaded** p
 ```
 - **Playlists Path**: The path where the playlist is saved.
 
-### Create xspf File of the Playlist
+### Create xspf File for All Playlist
 
 Run the `xspfall.ps1` script to create a *xspf* file for all  **already downloaded** playlists:
 
