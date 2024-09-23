@@ -1,9 +1,10 @@
 param (
+    [switch]$xspf,        # A flag parameter for creating XSPF files
     [string]$playlistPath
 )
 
 if (-not $playlistPath) {
-    Write-Host "Usage: .\mpd.ps1 <Playlist Path>" -ForegroundColor Magenta
+    Write-Host "Usage: .\mpd.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
     exit
 } elseif (-not (Test-Path -Path $playlistPath)) {
     Write-Host "Playlist directory was not found:" -ForegroundColor Yellow
@@ -13,6 +14,7 @@ if (-not $playlistPath) {
 
 $originalPath = Get-Location
 $missingTracksFile = Join-Path $playlistPath ".info\missing_tracks.txt"
+$xspfScript = Join-Path $originalPath  "xspf.ps1"
 
 if (-not (Test-Path -Path $missingTracksFile)) {
     Write-Host "No missing tracks file found in the directory:" -ForegroundColor Yellow
@@ -32,10 +34,11 @@ Write-Host "`t$playlistPath"
 # Download the manually add musics
 Set-Location -Path $playlistPath
 foreach ($track in $missingTracks) {
-    $splitLine = $track -split "\s+"
-    $nameTrackPart = $track -split ": "
-    $downloadPair = $splitLine[0]
-    $nameTrack = $nameTrackPart[2]
+    # TODO: This can Explode if the lines where edited more then they needed
+    $splitSpace = $track -split "\s+"
+    $splitDots = $track -split ": "
+    $downloadPair = $splitSpace[0]
+    $nameTrack = $splitDots[2]
 
     Write-Host "Downloading manually added track: $nameTrack" -ForegroundColor Blue
     try {
@@ -44,6 +47,16 @@ foreach ($track in $missingTracks) {
         Write-Host "Failed to download music." -ForegroundColor Red
         Write-Host "Error:`r`n$_" -ForegroundColor Red
     }
+}
+
+# Create xspf file for playlist
+if($xspf){
+    try {
+        & $xspfScript -playlistPath $playlistPath
+    } catch {
+        Write-Host "Error occurred while running xspf.ps1:" -ForegroundColor Red
+        Write-Host $_.Exception.Message -ForegroundColor Red
+    } 
 }
 
 Set-Location -Path $originalPath

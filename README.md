@@ -32,11 +32,12 @@ This repository contains PowerShell scripts to download and manage Spotify playl
 Run the `sdl.ps1` script to download a Spotify playlist:
 
 ```bash
-.\sdl.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>]
+.\sdl.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>] [-xspf]
 ```
 - **Directory Name**: The name you want to assign to the downloaded playlist folder.
 - **Spotify URL**: The URL of the Spotify playlist.
 - **Download Path**: The path where the playlist will be saved. (Optional) A default can be set inside the script.
+- **xspf**: (Optional) Include this flag to generate *xspf* file for the playlist. If it was download without missing tracks.
 
 <hr>
 
@@ -44,9 +45,10 @@ Run the `sdl.ps1` script to download a Spotify playlist:
 Run the `upd.ps1` script to update an **already downloaded** playlist:
 
 ```bash
-.\upd.ps1 <Playlist Path>
+.\upd.ps1 <Playlist Path> [-xspf]
 ```
 - **Playlists Path**: The path where the playlist is saved.
+- **xspf**: (Optional) Include this flag to generate *xspf* file for the playlist.
 
 <hr>
 
@@ -66,9 +68,10 @@ Run the `updall.ps1` script to update all **already downloaded** playlists:
 Run the `mpd.ps1` script to update the missing tracks of an **already downloaded** playlist:
 
 ```bash
-.\mpd.ps1 <Playlist Path> 
+.\mpd.ps1 <Playlist Path> [-xspf]
 ```
 - **Playlists Path**: The path where the playlist is saved.
+- **xspf**: (Optional) Include this flag to generate *xspf* files for the playlists.
 
 <hr>
 
@@ -81,6 +84,15 @@ Run the `xspf.ps1` script to create a *xspf* file of an **already downloaded** p
 ```
 - **Playlists Path**: The path where the playlist is saved.
 
+### Create xspf File of the Playlist
+
+Run the `xspfall.ps1` script to create a *xspf* file for all  **already downloaded** playlists:
+
+```bash
+.\xspfall.ps1 [<Optional: Playlists Path>]
+```
+- **Playlists Path**: The path where the playlists are saved. (Optional) A default can be set inside the script.
+
 <hr>
 
 ## Missing Tracks
@@ -88,7 +100,7 @@ Run the `xspf.ps1` script to create a *xspf* file of an **already downloaded** p
 If a track is not found during the download process, the `missing_tracks.txt` file will contain the relevant information. For more details, check the [missing_tracks_example.txt](missing_tracks_example.txt) file in the repository.
 
 ## Known Issues
-
+- If the commad freezes it's probably problems with communication with the spotify api. To solve the problem check the solution for the problem below.
 - For 429/500/404 Errors and Rate Limiting Issues, you can see the details [here](https://github.com/spotDL/spotify-downloader/issues/2142).
 
 ## License

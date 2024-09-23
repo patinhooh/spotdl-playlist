@@ -12,8 +12,8 @@ if (-not $playlistPath) {
 }
 
 $folderName = Split-Path $playlistPath -Leaf 
-$fileFormatName = ($folderName -replace ' ', '-' -replace '[^a-zA-Z0-9-]', '').ToLower()
-$xspfPath = Join-Path $playlistPath ".info\$fileFormatName.xspf"
+$fileName = ($folderName -replace ' ', '-' -replace '[^a-zA-Z0-9-]', '').ToLower()
+$xspfPath = Join-Path $playlistPath ".info\$fileName.xspf"
 
 # Get all track files in the playlist path
 $trackFiles = Get-ChildItem -Path $playlistPath -File
@@ -32,11 +32,12 @@ $xspfContent = @"
 
 foreach ($track in $trackFiles) {
     # Convert the file path to a URI
-    $uri = [System.Uri]::EscapeUriString("file:///$($track.FullName)") -replace '%5C', '/'
+    # TODO: Make it better
+    $uri = ([System.Uri]::EscapeUriString("file:///$($track.FullName)")) -replace "%5C", "/" -replace "&", "&amp;"
     $xspfContent += @"
     <track>
       <location>$uri</location>
-      <title>$($track.Name)</title>
+      <title>$($track.Name -replace "&", "&amp;")</title>
     </track>
 "@
 }
