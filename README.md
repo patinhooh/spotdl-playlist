@@ -7,7 +7,7 @@ This repository contains PowerShell scripts to download and manage Spotify playl
 - [Installation](#installation)
 - [Usage](#usage)
   - [Download a Playlist](#download-a-playlist)
-  - [Update Playlists](#update-playlists)
+  - [Update Playlists](#update-playlist)
   - [Update All Playlists](#update-all-playlists)
   - [Update Missing Tracks of Playlist](#update-missing-tracks-of-playlist)
   - [Create xspf file of the Playlist](#create-xspf-file-of-the-playlist)
@@ -42,7 +42,7 @@ Run the `sdl.ps1` script to download a Spotify playlist:
 
 <hr>
 
-### Update Playlists
+### Update Playlist
 Run the `upd.ps1` script to update an **already downloaded** playlist:
 
 ```bash
@@ -98,7 +98,17 @@ Run the `xspfall.ps1` script to create a *xspf* file for all  **already download
 
 ## Missing Tracks
 
-If a track is not found during the download process, the `missing_tracks.txt` file will contain the relevant information. For more details, check the [missing_tracks_example.txt](missing_tracks_example.txt) file in the repository.
+If a track is not found during the download process, the `missing_tracks.txt` file will contain the relevant information. 
+
+Possible errors on the file:
+- If you see this one follow the [missing_tracks_example.txt](missing_tracks_example.txt) 
+```
+https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - LookupError: No results found for song: 'Artist' - 'Music Name'
+```
+- For this one it downloaded the music but failed to download the metadata. Delete the music without metadata and run [upd.ps1](#update-playlist) if you what to retry download with the metadata. You can delete this line from the `missing_tracks.txt` and if it ends up empty you can delete the file.
+```
+https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - MetadataError: Failed to embed metadata to the song
+```
 
 ## Known Issues
 - If the commad freezes it's probably problems with communication with the spotify api. To solve the problem check the solution for the problem below.
