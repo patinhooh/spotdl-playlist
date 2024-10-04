@@ -8,7 +8,7 @@ if (-not $playlistPath) {
     exit
 } elseif (-not (Test-Path -Path $playlistPath)) {
     Write-Host "Playlist directory was not found:" -ForegroundColor Yellow
-    Write-Host "`t$playlistPath"
+    Write-Host "    '$playlistPath'"
     exit
 }
 
@@ -18,7 +18,7 @@ $xspfScript = Join-Path $originalPath  "xspf.ps1"
 
 if (-not (Test-Path -Path $missingTracksFile)) {
     Write-Host "No missing tracks file found in the directory:" -ForegroundColor Yellow
-    Write-Host "`t$playlistPath"
+    Write-Host "    '$playlistPath'"
     exit
 }
 
@@ -29,7 +29,7 @@ if (-not ($missingTracks.Count -gt 0)) {
 }
 
 Write-Host "Processing manually added tracks for:" -ForegroundColor Blue
-Write-Host "`t$playlistPath"
+Write-Host "    '$playlistPath'"
 
 # Download the manually add musics
 Set-Location -Path $playlistPath
@@ -55,8 +55,8 @@ if($xspf){
         & $xspfScript -playlistPath $playlistPath
     } catch {
         Write-Host "Error occurred while running xspf.ps1:" -ForegroundColor Red
-        Write-Host $_.Exception.Message -ForegroundColor Red
+        Write-Host "`r`n$_" -ForegroundColor Red
     } 
 }
-
+Write-Host ""
 Set-Location -Path $originalPath
