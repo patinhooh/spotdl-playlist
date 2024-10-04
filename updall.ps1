@@ -9,7 +9,7 @@ if (-not $playlistsPath) {
     exit
 } elseif (-not (Test-Path -Path $playlistsPath)) {
     Write-Host "Playlists directory was not found:" -ForegroundColor Yellow
-    Write-Host "`t$playlistsPath"
+    Write-Host "    $playlistsPath"
     exit
 }
 

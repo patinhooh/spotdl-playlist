@@ -7,7 +7,7 @@ if (-not $playlistPath) {
     exit
 } elseif (-not (Test-Path -Path $playlistPath)) {
     Write-Host "Playlist directory was not found:" -ForegroundColor Yellow
-    Write-Host "`t$playlistPath"
+    Write-Host "    '$playlistPath'"
     exit
 }
 
@@ -36,8 +36,8 @@ foreach ($track in $trackFiles) {
     $uri = ([System.Uri]::EscapeUriString("file:///$($track.FullName)")) -replace "%5C", "/" -replace "&", "&amp;"
     $xspfContent += @"
     <track>
-      <location>$uri</location>
-      <title>$($track.Name -replace "&", "&amp;")</title>
+    <location>$uri</location>
+    <title>$($track.Name -replace "&", "&amp;")</title>
     </track>
 "@
 }
@@ -51,9 +51,10 @@ $xspfContent += @"
 try {
     Set-Content -Path $xspfPath -Value $xspfContent -Encoding UTF8 -ErrorAction Stop
     Write-Host "XSPF file created at:" -ForegroundColor Green
-    Write-Host "`t$xspfPath"
+    Write-Host "    '$xspfPath'"
 } catch {
     Write-Host "Failed to create XSPF file:" -ForegroundColor Red
-    Write-Host "`t$xspfPath"
+    Write-Host "    '$xspfPath'"
     Write-Host "Error:`r`n$_" -ForegroundColor Red
 }
+Write-Host ""
