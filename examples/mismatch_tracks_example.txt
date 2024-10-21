@@ -1,0 +1,5 @@
+# If you found a song that is not the same as the spotify one:
+# Create a the file mismatch_tracks.txt in 'playlist/.info/'
+# Add the line bellow with the file name of the music and link to the correct 
+# source with a '|' between then:
+Music File Name.mp3|https://music.youtube.com/watch?v=lYBUbBu4W08

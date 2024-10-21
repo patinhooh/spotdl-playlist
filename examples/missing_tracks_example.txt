@@ -1,0 +1,5 @@
+# After using dsp.ps1, if it fails to find a song, the output will look like this:
+https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - LookupError: No results found for song: 'Artist' - 'Music Name'
+
+# To use upd.ps1 for updating, add the Youtube Link before the Spotify link, like this: YoutubeURL|SpotifyURL [...]
+https://music.youtube.com/watch?v=lYBUbBu4W08|https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - LookupError: No results found for song: 'Artist' - 'Music Name'

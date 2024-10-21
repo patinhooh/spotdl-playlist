@@ -15,7 +15,7 @@ if (-not $playlistPath) {
 $originalPath = Get-Location
 $infoPath = Join-Path $playlistPath ".info"
 $syncPath = Join-Path $infoPath "sync.spotdl"
-$mpdScript = Join-Path $originalPath  "mpd.ps1"
+$umtScript = Join-Path $originalPath  "umt.ps1"
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 $missingTracksExisted = Test-Path -Path "$infoPath\missing_tracks.txt"
 
@@ -46,11 +46,11 @@ try {
 
 # Manually added tracks 
 try {
-    & $mpdScript -playlistPath $playlistPath
+    & $umtScript -playlistPath $playlistPath
 } catch {
-    Write-Host "Error occurred while running mpd.ps1:" -ForegroundColor Red
+    Write-Host "Error occurred while running umt.ps1:" -ForegroundColor Red
     Write-Host "`r`n$_" -ForegroundColor Red
-} 
+}
 
 # Create xspf file for playlist
 if($xspf){

@@ -4,7 +4,7 @@ param (
 )
 
 if (-not $playlistPath) {
-    Write-Host "Usage: .\mpd.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
+    Write-Host "Usage: .\umt.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
     exit
 } elseif (-not (Test-Path -Path $playlistPath)) {
     Write-Host "Playlist directory was not found:" -ForegroundColor Yellow

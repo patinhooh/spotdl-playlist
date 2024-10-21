@@ -7,12 +7,12 @@ param (
 
 if (-not $downloadPath) {
     Write-Host "Please specify the download path either in the script or as a command line argument." -ForegroundColor Yellow
-    Write-Host "Usage: .\sdl.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>] [-xspf]" -ForegroundColor Magenta
+    Write-Host "Usage: .\dsp.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>] [-xspf]" -ForegroundColor Magenta
     exit
 }
 
 if (-not $playlistUrl -or -not $playlistName) {
-    Write-Host "Usage: .\sdl.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>] [-xspf]" -ForegroundColor Magenta
+    Write-Host "Usage: .\dsp.ps1 <Directory Name> <Spotify URL> [<Optional: Download Path>] [-xspf]" -ForegroundColor Magenta
     exit
 }
 
