@@ -8,8 +8,8 @@ This repository contains PowerShell scripts to download and manage Spotify playl
 - [Usage](#usage)
   - [Download Spotify Playlist](#download-spotify-playlist)
   - [Update Playlists](#update-playlist)
-  - [Update Missing Tracks of Playlist](#update-missing-tracks-of-playlist)
-  - [Create xspf file of the Playlist](#create-xspf-file-of-the-playlist)
+  - [Update Missing Tracks](#update-missing-tracks)
+  - [Create xspf File](#create-xspf-file)
   - [Fix Mismatches](#fix-mismatches)
 - [Missing Tracks](#missing-tracks)
 - [Known Issues](#known-issues)
@@ -24,7 +24,7 @@ This repository contains PowerShell scripts to download and manage Spotify playl
     git clone https://github.com/patinhooh/spotdl-playlist.git
     cd spotdl-playlist  
     ```
-4. \[Optional\] You can rename and move the `./src/` dir to the Playlists location to a easier experience.
+4. \[Optional\] You can rename and move the `./src/` dir closer to the Playlists location for a easier experience.
 
 
 ## Usage
@@ -68,7 +68,7 @@ Run the `updall.ps1` script to update all **already downloaded** playlists:
 
 <hr>
 
-### Update Missing Tracks of Playlist
+### Update Missing Tracks
 
 Run the `umt.ps1` script to update the missing tracks of an **already downloaded** playlist:
 
@@ -82,7 +82,7 @@ Run the `umt.ps1` script to update the missing tracks of an **already downloaded
 
 <hr>
 
-### Create xspf File of the Playlist
+### Create xspf File
 
 Run the `xspf.ps1` script to create a *xspf* file of an **already downloaded** playlist:
 
@@ -109,7 +109,7 @@ Run the `xspfall.ps1` script to create a *xspf* file for all  **already download
 
 ### Fix Mismatches
 
-Use the `fmm.ps1` script to fix miss matched music of an **already downloaded** playlist:
+Use the `fmm.ps1` script to fix mismatched music of an **already downloaded** playlist:
 
 You can either use the command to add a entry or create manually the `mismatch_tracks.txt` file. If you want to do it manually see the [mismatch_tracks_example.txt](examples/mismatch_tracks_example.txt) and skip to the next command.
 
@@ -161,7 +161,7 @@ https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=5413617837db457d - Meta
   ```
   https://music.youtube.com/watch?v=lYBUbBu4W08&si=mWmOBJomW8bXyKEr
   ```
-  Remove the the '&si=...'
+  Remove the '&si=...'
   ```
   https://music.youtube.com/watch?v=lYBUbBu4W08
   ```
