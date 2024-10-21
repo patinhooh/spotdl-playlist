@@ -16,7 +16,6 @@ if (-not $playlistsPath) {
 $originalPath = Get-Location
 $playlistDirectories = Get-ChildItem -Path $playlistsPath -Directory
 $updScript = Join-Path $originalPath  "upd.ps1"
-$umtScript = Join-Path $originalPath  "umt.ps1"
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 
 foreach ($dir in $playlistDirectories) {
@@ -25,14 +24,6 @@ foreach ($dir in $playlistDirectories) {
         & $updScript -playlistPath $dir.FullName
     } catch {
         Write-Host "Error occurred while running upd.ps1:" -ForegroundColor Red
-        Write-Host $_.Exception.Message -ForegroundColor Red
-    } 
-
-    # Manually added tracks 
-    try {
-        & $umtScript -playlistPath $dir.FullName
-    } catch {
-        Write-Host "Error occurred while running umt.ps1:" -ForegroundColor Red
         Write-Host $_.Exception.Message -ForegroundColor Red
     } 
 
