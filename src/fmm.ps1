@@ -4,7 +4,9 @@ param (
     [string]$trackName,
     [string]$correctSrcURL
 )
-
+# Convert to Full Path
+$playlistPath = $playlistPath | Resolve-Path
+$playlistPath = $playlistPath -replace "'","`'"
 
 if (-not $playlistPath){
     Write-Host "To add track to the miss matches" -ForegroundColor Yellow

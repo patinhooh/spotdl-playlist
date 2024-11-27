@@ -16,8 +16,13 @@ if (-not $playlistUrl -or -not $playlistName) {
     exit
 }
 
-$originalPath = Get-Location                           
-$playlistPath = Join-Path $downloadPath $playlistName 
+$originalPath = Get-Location
+# Convert to Full Path
+$downloadPath = $downloadPath | Resolve-Path
+$playlistPath = Join-Path $downloadPath $playlistName
+$playlistPath = $playlistPath -replace "'","`'"
+
+
 $infoPath = Join-Path $playlistPath ".info"           
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 

@@ -1,7 +1,7 @@
 param (
     [string]$playlistsPath = "", # Default directory of the playlists downloaded
     [switch]$abs
-    )
+)
 
 if (-not $playlistsPath) {
     Write-Host "Please specify the download path either in the script or as a command line argument." -ForegroundColor Yellow
@@ -10,6 +10,8 @@ if (-not $playlistsPath) {
 }
 
 $originalPath = Get-Location
+$playlistPath = $playlistPath | Resolve-Path
+$playlistPath = $playlistPath -replace "'","`'"
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 $playlistDirectories = Get-ChildItem -Path $playlistsPath -Directory
 

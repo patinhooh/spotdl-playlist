@@ -3,6 +3,9 @@ param (
     [string]$playlistPath
 )
 
+$playlistPath = $playlistPath | Resolve-Path
+$playlistPath = $playlistPath -replace "'","`'"
+
 if (-not $playlistPath) {
     Write-Host "Usage: .\umt.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
     exit

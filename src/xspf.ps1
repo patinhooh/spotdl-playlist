@@ -13,6 +13,8 @@ if (-not $playlistPath) {
     exit
 }
 
+$playlistPath = $playlistPath | Resolve-Path
+$playlistPath = $playlistPath -replace "'","`'"
 # Sanitize folder name to create a valid file name
 $folderName = Split-Path $playlistPath -Leaf 
 $fileName = $folderName -replace ' ', '-'`
@@ -49,11 +51,10 @@ $xspfContent = @"
 
 foreach ($track in $trackFiles) {
     # Convert the file path to a URI
-    $trackName = $($track.Name -replace "&", "&amp;")
     if ($abs) {
         $uri = ([System.Uri]::EscapeUriString("file:///$($track.FullName)")) -replace "%5C", "/" -replace "&", "&amp;"
     } else {
-        $uri = [System.Uri]::EscapeUriString("../$trackName") -replace "%5C", "/"
+        $uri = [System.Uri]::EscapeUriString("../$($track.Name)") -replace "%5C", "/" -replace "&", "&amp;"
 }
 
     $xspfContent += @"

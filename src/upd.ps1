@@ -13,6 +13,8 @@ if (-not $playlistPath) {
 }
 
 $originalPath = Get-Location
+$playlistPath = $playlistPath | Resolve-Path
+$playlistPath = $playlistPath -replace "'","`'"
 $infoPath = Join-Path $playlistPath ".info"
 $syncPath = Join-Path $infoPath "sync.spotdl"
 $umtScript = Join-Path $originalPath  "umt.ps1"
