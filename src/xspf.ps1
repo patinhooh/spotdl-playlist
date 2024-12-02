@@ -51,21 +51,24 @@ $xspfContent = @"
 
 foreach ($track in $trackFiles) {
     # Convert the file path to a URI
-    if ($abs) {
-        $uri = ([System.Uri]::EscapeUriString("file:///$($track.FullName)")) -replace "%5C", "/" -replace "&", "&amp;"
-    } else {
-        $uri = [System.Uri]::EscapeUriString("../$($track.Name)") -replace "%5C", "/" -replace "&", "&amp;"
-}
+	if ($abs) {
+		$escapedPath = [System.Uri]::EscapeDataString($track.FullName)
+		$uri = "file:///$escapedPath" -replace "%5C", "/" -replace "&", "&amp;"
+	} else {
+		$escapedName = [System.Uri]::EscapeDataString($track.Name)
+		$uri = "../$escapedName" -replace "%5C", "/" -replace "&", "&amp;"
+	}
 
     $xspfContent += @"
+
     <track>
         <location>$uri</location>
-        <title>$trackName</title>
     </track>
 "@
 }
 
 $xspfContent += @"
+
   </trackList>
 </playlist>
 "@
