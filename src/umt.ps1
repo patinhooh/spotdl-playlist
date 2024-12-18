@@ -4,7 +4,6 @@ param (
 )
 
 $playlistPath = $playlistPath | Resolve-Path
-$playlistPath = $playlistPath -replace "'","`'"
 
 if (-not $playlistPath) {
     Write-Host "Usage: .\umt.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
@@ -45,7 +44,7 @@ foreach ($track in $missingTracks) {
 
     Write-Host "Downloading manually added track: $nameTrack" -ForegroundColor Blue
     try {
-        Invoke-Expression "spotdl download '$downloadPair'"
+        Invoke-Expression "spotdl download `"$downloadPair`""
     } catch {
         Write-Host "Failed to download music." -ForegroundColor Red
         Write-Host "Error:`r`n$_" -ForegroundColor Red

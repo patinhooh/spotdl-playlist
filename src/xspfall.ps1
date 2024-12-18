@@ -11,7 +11,6 @@ if (-not $playlistsPath) {
 
 $originalPath = Get-Location
 $playlistsPath = $playlistsPath | Resolve-Path
-$playlistsPath = $playlistsPath -replace "'","`'"
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 $playlistDirectories = Get-ChildItem -Path $playlistsPath -Directory
 

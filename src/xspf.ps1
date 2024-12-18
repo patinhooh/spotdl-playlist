@@ -14,7 +14,6 @@ if (-not $playlistPath) {
 }
 
 $playlistPath = $playlistPath | Resolve-Path
-$playlistPath = $playlistPath -replace "'","`'"
 # Sanitize folder name to create a valid file name
 $folderName = Split-Path $playlistPath -Leaf 
 $fileName = $folderName -replace ' ', '-'`

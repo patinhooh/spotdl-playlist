@@ -14,7 +14,6 @@ if (-not $playlistPath) {
 
 $originalPath = Get-Location
 $playlistPath = $playlistPath | Resolve-Path
-$playlistPath = $playlistPath -replace "'","`'"
 $infoPath = Join-Path $playlistPath ".info"
 $syncPath = Join-Path $infoPath "sync.spotdl"
 $umtScript = Join-Path $originalPath  "umt.ps1"
@@ -35,9 +34,9 @@ Set-Location -Path $playlistPath
 try {
     #--sync-without-deleting ?
     if ($missingTracksExisted){
-        Invoke-Expression "spotdl sync `"$syncPath`" --save-errors '$infoPath\missing_tracks_upd.txt'"
+        Invoke-Expression "spotdl sync `"$syncPath`" --save-errors `"$infoPath\missing_tracks_upd.txt`""
     }else{
-        Invoke-Expression "spotdl sync `"$syncPath`" --save-errors '$infoPath\missing_tracks.txt'"
+        Invoke-Expression "spotdl sync `"$syncPath`" --save-errors `"$infoPath\missing_tracks.txt`""
     }
     Write-Host "spotdl finished.`r`n" -ForegroundColor Magenta
 } catch {

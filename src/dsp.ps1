@@ -20,7 +20,6 @@ $originalPath = Get-Location
 # Convert to Full Path
 $downloadPath = $downloadPath | Resolve-Path
 $playlistPath = Join-Path $downloadPath $playlistName
-$playlistPath = $playlistPath -replace "'","`'"
 
 
 $infoPath = Join-Path $playlistPath ".info"           
@@ -73,7 +72,7 @@ try {
 }
 
 # spotdl command to synchronize the playlist
-$command = "spotdl sync $playlistUrl --save-file '$infoPath\sync.spotdl' --save-errors '$infoPath\missing_tracks.txt'"
+$command = "spotdl sync $playlistUrl --save-file `"$infoPath\sync.spotdl`" --save-errors `"$infoPath\missing_tracks.txt`""
 Write-Host $command -ForegroundColor Magenta
 try {
     Invoke-Expression $command

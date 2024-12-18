@@ -6,7 +6,6 @@ param (
 )
 # Convert to Full Path
 $playlistPath = $playlistPath | Resolve-Path
-$playlistPath = $playlistPath -replace "'","`'"
 
 if (-not $playlistPath){
     Write-Host "To add track to the miss matches" -ForegroundColor Yellow
@@ -93,8 +92,8 @@ foreach ($track in $mismatchedTracks) {
 
     Write-Host "Downloading correct track." -ForegroundColor Green
     try {
-        Write-Host "spotdl '$trackCorrectURL' --output '$trackNameWithoutExtension.{output-ext}'" -ForegroundColor Magenta
-        Invoke-Expression "spotdl '$trackCorrectURL' --output '$trackNameWithoutExtension.{output-ext}'"
+        Write-Host "spotdl `"$trackCorrectURL`" --output `"$trackNameWithoutExtension.{output-ext}`"" -ForegroundColor Magenta
+        Invoke-Expression "spotdl `"$trackCorrectURL`" --output `"$trackNameWithoutExtension.{output-ext}`""
     } catch {
         Write-Host "Failed to download music." -ForegroundColor Red
         Write-Host "Error:`r`n$_" -ForegroundColor Red
