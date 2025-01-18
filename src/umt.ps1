@@ -3,8 +3,6 @@ param (
     [string]$playlistPath
 )
 
-$playlistPath = $playlistPath | Resolve-Path
-
 if (-not $playlistPath) {
     Write-Host "Usage: .\umt.ps1 <Playlist Path> [-xspf]" -ForegroundColor Magenta
     exit
@@ -15,6 +13,7 @@ if (-not $playlistPath) {
 }
 
 $originalPath = Get-Location
+$playlistPath = $playlistPath | Resolve-Path
 $missingTracksFile = Join-Path $playlistPath ".info\missing_tracks.txt"
 $xspfScript = Join-Path $originalPath  "xspf.ps1"
 
